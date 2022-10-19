@@ -61,18 +61,18 @@ g : global search flag - return all matches
     - ```/t[a-z]*i/``` would match to 'titani' but ```/t[a-z]*?i/``` would return 'ti'
     - 0 or 1
 - **$**: With test, it's used to see if a pattern appears at the end of a a string.
-    - ```/mint$/.test("minty mint")``` returns true but ```/mint$/.test("minty yep")``` returns false.
+    - ```/mint$/.test("minty mint")``` returns true but ```/mint$/.test("mints are spicy")``` returns false.
 - **()**: Capture groups. Substrings matched to the group are saved to a temp variable/
   - Numbered by the position of their opening parentheses
   - ex: ```/(\w+) \1 \1)/``` matches a word that occurs thrice seperated by spaces.
 #### Quantifiers
-- **?**: 0 or 1
+- **?**: 0 or 1.
 - **\***: 0 or more.
 - **+**: 1 or more.
 - **{2}**: exactly 2. Used like '+' or '*'
 - **{2,}**: 2 or more
 - **(?=.{2}$)**: exactly 2 charcters in string. 
-  - Looks to make sure the condition is met, before looking at the rest of the regex.
+  - Looks to make sure the condition is met before looking at the rest of the regex.
 - **(?!...)**: Looks to make sure a pattern is not there.
 
 #### Shortcuts
