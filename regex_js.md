@@ -40,6 +40,14 @@ g : global search flag - return all matches
 
 ### **General**
 
+- To include variables:
+  ~~~javascript
+  //Test that pattern occurs at the end of the string.
+  let regstr = `.*${target}\$`
+  let regex = new RegExp(regstr)
+  return regex.test(str);
+  ~~~
+
 - **|**: Lets you search with multiple constraints. Ex: "/yes|no/"
 - **.** : The wildcard character "." matches any one character
     - Using the regex ```/hu./```will match with hum, hug, hub, etc

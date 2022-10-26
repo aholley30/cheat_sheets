@@ -6,6 +6,12 @@
   console.log(`printin with a ${var}`);
   ~~~
 - Using ```typeof variable``` will return a string of the type.
+- Iterate through all keys in an object with a for each loop
+  ~~~javascript
+  for (let user in users) {
+    console.log(user);
+  }
+  ~~~
 ### Variable declarations
 - **var**
   - allows redefinition and updating
@@ -22,6 +28,9 @@
   
 ### Arrays
 - Mutable
+- To reverse: ```arr.reverse```
+- Convert to string w/o commas: ```arr.join('')```
+- Convert to string w/ commas: ```arr.toString()```
 - Add to an array with ```push()``` and ```unshift()```
   - unshift adds to the beginning
   - push adds to the end
@@ -48,6 +57,13 @@
   numbers.splice(startIndex, amountToDelete, 13, 14);
   //numbers = [ 10, 11, 12, 13, 14, 15 ]
   ~~~
+- To add one or more items at a specific index, also use ```splice()```
+  ~~~javascript
+  arr.splice(index, 0, item);
+  //explanation:
+  inserts "item" at the specified "index",
+  deleting 0 other items before it
+  ~~~
 - To copy part of an array, use ```.slice(ind1, ind2)```
   - Ind1 is the starting index
   - Ind2 is the exclusive ending index
@@ -61,3 +77,50 @@
 - Use ```.indexOf(element)``` to get the index of something in the array.
   - Returns -1 if element is not in array.
 ### Key-Value Objects
+~~~javascript
+let foods = {
+  apples: 25,
+  oranges: 32,
+  plums: 28
+  data: {
+    popularity: 15
+    total: 25
+  }
+};
+~~~
+- Adding new elements:
+  ~~~javascript
+  foods.origin = 'Dirt';
+  foods['origin'] = 'Dirt';
+  ~~~
+- Nested elements: ```foods.data.popularity = 1```
+- To remove elements, use delete: ```delete foods.data```
+- To check if an object has a certain property
+  ~~~javascript
+  foods.hasOwnProperty('plums');
+  'plums' in foods;
+  ~~~
+- Retrieving elements in for...in loop:
+  ~~~javascript
+  for (let user in users) {
+    if (users[user]['online']) {
+      count += 1;
+    }
+  }
+  ~~~
+- Get list of keys: ```Object.keys(obj)```
+### Strings
+- ```charAt(index)```	returns the character at the specified index
+- ```concat()```	joins two or more strings
+- ```replace()```	replaces a string with another string
+- ```split('')```	converts the string to an array of strings
+- ```substr(start, length)```	returns a part of a string
+- ```substring(start,end)```	returns a part of a string
+- ```slice(start, end)```	returns a part of a string
+- ```toLowerCase()```	returns the passed string in lower case
+- ```toUpperCase()```	returns the passed string in upper case
+- ```trim()```	removes whitespace from the strings
+- ```includes()```	searches for a string and returns a boolean value
+- ```search()```	searches for a string and returns a position of a match
+
+
