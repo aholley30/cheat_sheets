@@ -76,6 +76,11 @@
   ~~~
 - Use ```.indexOf(element)``` to get the index of something in the array.
   - Returns -1 if element is not in array.
+- Sort array using the ```.sort()``` method:
+  ~~~javascript
+  numArray.sort((a, b) => a - b); // For ascending sort
+  numArray.sort((a, b) => b - a); // For descending sort
+  ~~~
 ### Key-Value Objects
 ~~~javascript
 let foods = {
@@ -122,5 +127,34 @@ let foods = {
 - ```trim()```	removes whitespace from the strings
 - ```includes()```	searches for a string and returns a boolean value
 - ```search()```	searches for a string and returns a position of a match
+### Sets
+- Contain no duplicate values.
+- Make a new set from list with ```new Set(list)```
+- Use ```.add(val)``` to add a new value.
+- Use ```.has(val)``` to check if val is in the set.
+- Remove everything from the set with ```.clear()```
+- Remove an element with ```.delete(el)```
+- Use ```.size``` to check out how big the set is.
+- Convert to an array with ```Array.from(myset)```
+- Iterating through it:
+  ~~~javascript
+  // iterate over items in set
+  // all log the elements in insertion order
+  for (const item of mySet1) {
+    console.log(item);
+  }
+
+  for (const item of mySet1.keys()) {
+    console.log(item);
+  }
+
+  for (const item of mySet1.values()) {
+    console.log(item);
+  }
+
+  for (const [key, value] of mySet1.entries()) {
+    console.log(key);
+  }
+  ~~~
 
 
