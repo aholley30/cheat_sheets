@@ -9,13 +9,13 @@
 - To center something add the class name "text-center".
 ##### Buttons
 - For a bootstrap styled button add the classes "btn" and "btn-default" to the button element.
-  <p align="center"><button class="btn btn-default">Bootstrap Button</button></p>
+  <p align="center"><button class="btn btn-primary">Bootstrap Button</button></p>
   <p>&nbsp</p>
 
 - Making the button a block element will stretch it to fill the page's entire horizontal space so that any elements after will go to a new line.
   - Do this by also adding in the class "btn-block" with the previously mentioned classes.
   <p>&nbsp</p>
-  <p align="center"><button class="btn btn-default btn-block">Bootstrap Button</button></p>
+  <p align="center"><button class="btn btn-default btn-primary">Bootstrap Button</button></p>
   <p>&nbsp</p>
 - Button styles to use instead of "button-default":
   - "btn-primary": makes it a primary color.
