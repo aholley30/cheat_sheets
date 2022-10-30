@@ -3,7 +3,8 @@
 ### General
 - To print with variables: 
   ~~~javascript
-  console.log(`printin with a ${var}`);
+  console.log(`printin with a ${var}.`);
+  console.log('printin with a ' + var + '.');
   ~~~
 - Using ```typeof variable``` will return a string of the type.
 - Iterate through all keys in an object with a for each loop
@@ -27,7 +28,6 @@
   - block scoped
   
 ### Arrays
-- Mutable
 - To reverse: ```arr.reverse```
 - Convert to string w/o commas: ```arr.join('')```
 - Convert to string w/ commas: ```arr.toString()```
@@ -50,7 +50,7 @@
   - The first two params are the same as the one above
   - The other params are the items to replace the removed item
   ~~~javascript
-  const numbers = [10, 11, 12, 12, 15];
+  let numbers = [10, 11, 12, 12, 15];
   const startIndex = 3;
   const amountToDelete = 1;
 
@@ -73,6 +73,10 @@
   let thisArray = ['sage', 'rosemary'];
 
   let thatArray = ['cilantro', ...thisArray, 'coriander'];
+  ~~~
+- The spread operator does a deep copy when the array is 1D. For multidimensional arrays use this:
+  ~~~javascript
+  JSON.parse(JSON.stringify(array))
   ~~~
 - Use ```.indexOf(element)``` to get the index of something in the array.
   - Returns -1 if element is not in array.
@@ -114,6 +118,25 @@ let foods = {
   }
   ~~~
 - Get list of keys: ```Object.keys(obj)```
+- Turning it into a list:
+  ~~~javascript
+  var dict = {
+    "key1" : 100,
+    "key2" : 200,
+    "key3" : 300
+  }
+
+  var data = Object.entries(dict).map(([key, value]) => ([key, value]))
+  ~~~
+- These types of objects can contain functions:
+  ~~~javascript
+  let duck = {
+    name: "Aflac",
+    numLegs: 2,
+    sayName: function() {return "The name of this duck is " + this.name + ".";}
+  };
+  duck.sayName();
+  ~~~
 ### Strings
 - ```charAt(index)```	returns the character at the specified index
 - ```concat()```	joins two or more strings
@@ -124,7 +147,7 @@ let foods = {
 - ```slice(start, end)```	returns a part of a string
 - ```toLowerCase()```	returns the passed string in lower case
 - ```toUpperCase()```	returns the passed string in upper case
-- ```trim()```	removes whitespace from the strings
+- ```trim()```	removes starting and trailing whitespace from the strings
 - ```includes()```	searches for a string and returns a boolean value
 - ```search()```	searches for a string and returns a position of a match
 ### Sets
@@ -156,5 +179,70 @@ let foods = {
     console.log(key);
   }
   ~~~
+### OOP
+- Constructors create new objects
+  ~~~javascript
+  function Dog() {
+    this.name = "Albert";
+    this.color = "blue";
+    this.numLegs = 2;
+  }
+  let newDog = new Dog();
+  newDog.name = "Pince" //not a typo
+  ~~~
+  - They are defined with a capitalized name and use the <strong>this</strong> keyword.
+  - They define properties and behaviors instead of returning a value
+  - Can add arguments
+- To see if an object is an instance of a constructor, use this format: ```obj instanceof Dog```
+  - Can also use ```===``` like this: ``` beagle.constructor === Dog ```
+    - The constructor property can be overwritten so it's generally better to use instanceof.
+- Add all properties of an object to an array:
+  ~~~javascript
+  let canary = new Bird("Tweety");
+  let ownProps = [];
 
+  for (let prop in canary) {
+    if (canary.hasOwnProperty(prop)) {
+      ownProps.push(prop)
+    }
+  }
+  ~~~
+- Make a prototype of an object to reduce duplicate variables. Creates a shared variable among all instances.
+  - All instances automatically have the properties of the prototype
+  ~~~javascript
+  function Dog(name) {
+    this.name = name;
+  }
+  Dog.prototype.numLegs = 2;
+  ~~~
+- Own properties vs Prototype properties:
+  - Own properties are instance dependent
+    - Defined directly on the object instance
+  - Prototype properties are not instance dependent
+    - Defined on the object prototype
+- To add protype properties and own properties to their own arrays:
+  ~~~javascript
+  let ownProps = [];
+  let prototypeProps = [];
+
+  for (let property in duck) {
+    if(duck.hasOwnProperty(property)) {
+      ownProps.push(property);
+    } else {
+      prototypeProps.push(property);
+    }
+  }
+  ~~~
+- You can set a prototype to have multiple properties at a time
+  ~~~javascript
+  Bird.prototype = {
+    numLegs: 2, 
+    eat: function() {
+      console.log("nom nom nom");
+    },
+    describe: function() {
+      console.log("My name is " + this.name);
+    }
+  };
+  ~~~
 
