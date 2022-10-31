@@ -235,8 +235,13 @@ let foods = {
   ~~~
 - You can set a prototype to have multiple properties at a time
   ~~~javascript
+  function Bird(name) {
+    this.name = name;
+  }
+
   Bird.prototype = {
     numLegs: 2, 
+    constructor: Bird, //IMPORTANT
     eat: function() {
       console.log("nom nom nom");
     },
@@ -244,5 +249,105 @@ let foods = {
       console.log("My name is " + this.name);
     }
   };
+  let duck = new Bird("Canary")
   ~~~
+- An object inherits its prototype directly from the constructor function that created it. 
+  - In the code above, duck inherits its prototype from the bird constructor. This relationship can be shown with:
+    ~~~javascript
+    Bird.prototype.isPrototypeOf(duck);
+    ~~~
+- A prototype can have a prototype. The prototype of ```Bird.prototype``` is ```Object.prototype```. It inherits functions like ```.hasOwnProperty``` and whatever from ```Object.prototype```.
+  - Object is a supertype for all objects. 'Bird' would be a subtype of object, but a supertype of 'duck'.
+##### <em>Inheritance </em>
+- To make an inheritance relation, use Object.create(something.prototype)
+  ~~~javascript
+  let animal = Object.create(Animal.prototype);
+  animal instanceof Animal; //true
+  ~~~
+  - Creates a new object and sets obj as the new objects prototype.
+- To make a prototype inherit from another prototype:
+  ~~~javascript
+  let Bird.prototype = Object.create(Animal.prototype);
+  ~~~
+- The above example would also change the Bird's constructor to Animal.
+  - To change it back: 
+  ~~~javascript
+  Bird.prototype.constructor = Bird;
+  ~~~
+- Add new methods after inheritance the normal way:
+  ~~~javascript
+  Bird.prototype.fly = function() {
+    console.log("I'm flying!");
+  };
+  ~~~
+- You can override an inherited function by defining it again as if you were adding a new method like above.
+- To add a common behavior between unrelated objects, use a **mixin**.
+  ~~~javascript
+  //Take any object and give it a fly method
+  let flyMixin = function(obj) {
+    obj.fly = function() {
+      console.log("Flying, wooosh!");
+    }
+  };
+  flyMixin(air_plane);
+  ~~~
+- An **IIFE** (Immediately invoked function expression) is a function that is executed right after being declared. 
+  ~~~javascript
+  (function () { console.log("Chirp, chirp!"); })();
+  ~~~
+  - Also called an anonymous function expression.
+- An IIFE is often used to group related functionality into a single object. We can group multiple mixins together to form one object
+  ~~~javascript
+  function glideMixin(obj) {
+    obj.glide = function() {
+      console.log("Gliding on the water");
+    };
+  }
+  function flyMixin(obj) {
+    obj.fly = function() {
+      console.log("Flying, wooosh!");
+    };
+  }
+  
+  //group them together
+  let motionModule = (function () {
+    return {
+      glideMixin: function(obj) {
+        obj.glide = function() {
+          console.log("Gliding on the water");
+        };
+      },
+      flyMixin: function(obj) {
+        obj.fly = function() {
+          console.log("Flying, wooosh!");
+        };
+      }
+    }
+  })();
+
+  motionModule.glideMixin(duck);
+  duck.glide();
+  ~~~
+##### <em>Encapsulation</em>
+- Make a variable private by creating avariable within the constructor function.
+  ~~~javascript
+  function Bird() {
+    let hatchedEgg = 10; //private
+    this.name = "Blue Jay"; //public
+
+    this.getHatchedEggCount = function() { 
+      return hatchedEgg;
+    };
+  }
+  ~~~
+  - The ```getHatchedEggCount``` method is called a **priviledged** method since it has access to a private variable.
+    - In JavaScript, a function always has access to the context in which it was created. This is called **closure**.
+
+### Functional Programming
+
+- An **IIFE** (Immediately invoked function expression) is a function that is executed right after being declared. 
+  ~~~javascript
+  (function () { console.log("Chirp, chirp!"); })();
+  ~~~
+  - Also called an anonymous function expression.
 
