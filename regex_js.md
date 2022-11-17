@@ -26,7 +26,10 @@ wrongText.replace(silverRegex, "blue");
 "Code Camp".replace(/(\w+)\s(\w+)/, '$2 $1'); // Turns Code Camp into Camp Code
 
 ~~~
-
+<details>
+<summary><b>Python Regex Methods</b></summary>
+Nothing yet
+</details>
 
 ### **Flags**
 
@@ -57,8 +60,9 @@ g : global search flag - return all matches
     - find words beginning in a-e and ending in "at" -> ```/[a-e]at/```
     - You can search for a range of letters and numbers in one line: ```/a-e0-5/```
 - **^**: Using match, defines a range of characters you don't want to match with
-    - to match with everything but vowels: ```/^aeiou/```
-    - Using test, it'll return true if the pattern is at the beginning of the string
+    - to match with everything but vowels: ```/[^aeiou]/```
+    - Using test, outside of brackets, it'll return true if the pattern is at the beginning of the string
+    - to return true if the letter a doesn't appear in a pattern: ```/^[^a]*$/.test(pattern)```
 - **+**: 1 or more. Used to check how many times a character appears, excluding repeats use.
     - Using ```/a+/``` would return 1 match for 'a' and 'aa' and two matches for 'abab'.
     - ```^[a-z]+[0-9]*$``` makes sure there is 1 or more a-z letters in front (^) and 0 or more numbers in the back ($).
@@ -77,6 +81,7 @@ g : global search flag - return all matches
 - **?**: 0 or 1.
 - **\***: 0 or more.
 - **+**: 1 or more.
+- **+?**: 1 or more, non greedy
 - **{2}**: exactly 2. Used like '+' or '*'
 - **{2,}**: 2 or more
 - **(?=.{2}$)**: exactly 2 charcters in string. 

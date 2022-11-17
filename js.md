@@ -13,6 +13,30 @@
     console.log(user);
   }
   ~~~
+- Use ```continue``` to skip an iteration in a loop and ```break``` to exit a loop early.
+- Ternary expressions:
+  ~~~javascript
+  condition ? doThisIfTrue : doThisIfFalse
+
+  1 > 2 ? console.log(true) : console.log(false)
+  // returns false
+
+  //only if
+  condition && doThing
+  ~~~
+- Exponentiation can be achieved with ```num ** exp``` or ```Math.pow(num, exp)```
+- Try - Catch - Finally:
+  ~~~javascript
+  try {
+    // try_statements
+  } 
+  catch(error) {
+      console.error(error.message) // catch_statements  
+  }
+  finally() {
+      // codes that gets executed anyway
+  }
+  ~~~
 ### Variable declarations
 - **var**
   - allows redefinition and updating
@@ -31,7 +55,7 @@
 - To reverse: ```arr.reverse```
 - Convert to string w/o commas: ```arr.join('')```
 - Convert to string w/ commas: ```arr.toString()```
-- Add to an array with ```push()``` and ```unshift()```
+- Add to an array with ```push()``` and ```unshift()``` - these are inplace
   - unshift adds to the beginning
   - push adds to the end
 - Remove items from an array with ```pop()``` and ```shift()```
@@ -76,14 +100,26 @@
   ~~~
 - The spread operator does a deep copy when the array is 1D. For multidimensional arrays use this:
   ~~~javascript
-  JSON.parse(JSON.stringify(array))
+  array = JSON.parse(JSON.stringify(array))
   ~~~
+- To concatenate 2 arrays use ```.concat()``` it returns a new array.
+  - Format is ```arr1.concat(arr2)```
 - Use ```.indexOf(element)``` to get the index of something in the array.
   - Returns -1 if element is not in array.
 - Sort array using the ```.sort()``` method:
   ~~~javascript
   numArray.sort((a, b) => a - b); // For ascending sort
   numArray.sort((a, b) => b - a); // For descending sort
+  arr.sort(function(a, b) {       // alphabetical order
+    return a === b ? 0 : a < b ? -1 : 1;
+  });
+  ~~~
+- For Each iterator:
+  ~~~javascript
+  const avengers = ['thor', 'captain america', 'hulk'];
+  avengers.forEach((item, index)=>{
+	  console.log(index, item)
+  })
   ~~~
 ### Key-Value Objects
 ~~~javascript
@@ -142,6 +178,7 @@ let foods = {
 - ```concat()```	joins two or more strings
 - ```replace()```	replaces a string with another string
 - ```split('')```	converts the string to an array of strings
+  - can also take regex delimeters. for example ```/\d/``` would split by digits.
 - ```substr(start, length)```	returns a part of a string
 - ```substring(start,end)```	returns a part of a string
 - ```slice(start, end)```	returns a part of a string
@@ -150,6 +187,8 @@ let foods = {
 - ```trim()```	removes starting and trailing whitespace from the strings
 - ```includes()```	searches for a string and returns a boolean value
 - ```search()```	searches for a string and returns a position of a match
+- ```parseInt(str)``` to convert to integer
+- ```parseFloat(str)``` to convert to float
 ### Sets
 - Contain no duplicate values.
 - Make a new set from list with ```new Set(list)```
@@ -308,7 +347,7 @@ let foods = {
       console.log("Flying, wooosh!");
     };
   }
-  
+
   //group them together
   let motionModule = (function () {
     return {
@@ -344,10 +383,115 @@ let foods = {
     - In JavaScript, a function always has access to the context in which it was created. This is called **closure**.
 
 ### Functional Programming
+A style of programming where solutions are simple, isolated functions, without any side effects outside of the function scope.
 
-- An **IIFE** (Immediately invoked function expression) is a function that is executed right after being declared. 
-  ~~~javascript
-  (function () { console.log("Chirp, chirp!"); })();
-  ~~~
-  - Also called an anonymous function expression.
+- **Terminology**:
+  - <u>*Pure functions*</u> always returns the same result if the same arguments are passed. It does not depend on any state or data change during a program's execution.
+  - <u>*Callbacks*</u> are the functions that are slipped or passed into another function.
+  - <u>*First class functions*</u> can be assigned to a variable, passed into another function, or returned from another function just like any other normal value.
+  - <u>*Higher order functions*</u> take a function as an argument, or return a function as a return value.
+  - <u>*Lambda functions*</u> are passed in to other functions as arguments or returned from other functions.
+  - <u>*IIFE*</u> (Immediately invoked function expression) is a function that is executed right after being declared. 
+    ~~~javascript
+    (function () { console.log("Chirp, chirp!"); })();
+    ~~~
+    - Also called an anonymous function expression.
+- **Principles**:
+  1) Don't alter a variable or object - create new variables and objects and return them if need be from a function. 
+      - Using something like ```const newArr = arrVar```, where ```arrVar``` is an array will simply create a reference to the existing variable and not a copy. So changing a value in ```newArr``` would change the value in ```arrVar```.
+  2) Declare function parameters - any computation inside a function depends only on the arguments passed to the function, and not on any global object or variable.
+- **Methods**:
+   
+   - ```Array.prototype.map()``` or more simply, ```map```, iterates over each item in an array and returns a new array containing the results of calling the callback function on each element.
+      ~~~javascript
+    
+      const posts = [
+        { id: 1, title: "Sample Title 1", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit..." },
+        { id: 2, title: "Sample Title 2", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit..." },
+        { id: 3, title: "Sample Title 3", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit..." },
+      ];
+      // ES2016+
+      // Create new array of post IDs. I.e. [1,2,3]
+      const postIds = posts.map((post) => post.id);
+      // Create new array of post objects. I.e. [{ id: 1, title: "Sample Title 1" }]
+      const postSummaries = posts.map((post) => ({ id: post.id, title: post.title }));
+      ~~~
+    - ```Array.prototype.filter()``` or more simply, ```filter()``` calls a function on each element and returns a new array containing only the elements for which the function returns true.
+      ~~~javascript
+      const users = [
+        { name: 'John', age: 34 },
+        { name: 'Amy', age: 20 },
+        { name: 'camperCat', age: 10 }
+      ];
+
+      const usersUnder30 = users.filter(user => user.age < 30);
+      console.log(usersUnder30); 
+      ~~~
+      - Can accept 3 arguments: the current element being processed, the index of that element, the array. The example above only uses the first argument.
+    - ```Array.prototype.reduce()``` or simply ```reduce()```, iterates over each item in an array and returns a single value using a callback function.
+      - The callback func can take 4 args. 
+          1) The first is the accumulator, which gets assigned the return value of the callback function from the previous iteration. 
+          2) The second is the current element being processed. 
+          3) The third is the index of that element. 
+          4) The fourth is the array upon which reduce is called.
+      - ```reduce``` has another param that can take an initial value for the accumulator. If the second parameter is not used, then the first iteration is skipped and the second iteration gets passed the first element of the array as the accumulator.
+        ~~~javascript
+        const users = [
+          { name: 'John', age: 34 },
+          { name: 'Amy', age: 20 },
+          { name: 'camperCat', age: 10 }
+        ];
+
+        const sumOfAges = users.reduce((sum, user) => sum + user.age, 0);
+        console.log(sumOfAges); //64
+
+        const usersObj = users.reduce((obj, user) => {
+          obj[user.name] = user.age;
+          return obj;
+        }, {});
+        console.log(usersObj); //{ John: 34, Amy: 20, camperCat: 10 }
+        ~~~
+    - The ```every()``` method returns true if every element in an array meets a certain criteria.
+      ~~~javascript
+      const numbers = [1, 5, 8, 0, 10, 11];
+
+      numbers.every(function(currentValue) {
+        return currentValue < 10;
+      }); //false
+      ~~~
+    - The ```some()``` method returns true if any element in an array meets a certain criteria.
+      ~~~javascript
+      const numbers = [1, 5, 8, 0, 10, 11];
+
+      numbers.some(function(currentValue) {
+        return currentValue < 10;
+      }); //true
+      ~~~
+    - The <u>*arity*</u> of a function is the number of arguments it requires. <u>*Currying*</u> a function means to convert a function of N arity into N functions of arity 1.
+      ~~~javascript
+      function unCurried(x, y) {
+        return x + y;
+      }
+
+      function curried(x) {
+        return function(y) {
+          return x + y;
+        }
+      }
+
+      const curried = x => y => x + y
+
+      curried(1)(2)
+      ~~~
+      - A <u>*partial application*</u> can be described as applying a few arguments to a function at a time and returning another function that is applied to more arguments. 
+        ~~~javascript
+        function impartial(x, y, z) {
+          return x + y + z;
+        }
+
+        const partialFn = impartial.bind(this, 1, 2);
+        partialFn(10); // 13
+        ~~~
+
+  
 
