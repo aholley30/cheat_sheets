@@ -37,10 +37,28 @@
       // codes that gets executed anyway
   }
   ~~~
+- ```of``` vs ```in``` while looping: In prints default values while of does not.
+  ~~~javascript
+  const car = {
+    engine: true,
+    steering: true,
+    speed: 'slow'
+  }
+  const sportsCar = Object.create(car);
+  sportsCar.speed = 'fast';
+
+  for (prop in sportsCar) {
+    console.log(prop) //speed engine steering
+  }
+
+  for (prop of Object.keys(sportsCar)) {
+    console.log(prop) //speed
+  }
+  ~~~
 ### Variable declarations
 - **var**
   - allows redefinition and updating
-  - variables are hoisted to the top of their schope and initialized as undefined
+  - variables are hoisted to the top of their scope and initialized as undefined
   - scope is global when declared outside of a function and it's function wide when declared inside a function
 - **let**: <em>preferred</em>
   - does not allow redefinition but does allow updating
@@ -121,7 +139,7 @@
 	  console.log(index, item)
   })
   ~~~
-### Key-Value Objects
+### Dictionary Objects
 ~~~javascript
 let foods = {
   apples: 25,
@@ -218,7 +236,7 @@ let foods = {
     console.log(key);
   }
   ~~~
-### OOP
+### Javascript objects/structs
 - Constructors create new objects
   ~~~javascript
   function Dog() {
@@ -381,7 +399,42 @@ let foods = {
   ~~~
   - The ```getHatchedEggCount``` method is called a **priviledged** method since it has access to a private variable.
     - In JavaScript, a function always has access to the context in which it was created. This is called **closure**.
+### Classes & OOP
+Principles of OOP:
+1. Encapsulation: wraps related data and code into a single entity
+   - Can use functions without knowing how they work.
+2. Abstraction: Only shows or allows access to essential items in an entity.
+   - Achieved by using access modifiers
+3. Polymorphism: Using a single function that behaves differently based on context.
+   - Achieved by function overloading and overriding.
+4. Inheritance
+~~~javascript
+class Car {
+  constructor(color, speed) {
+    this.color = color;
+    this.speed = speed;
+  }
 
+  drive(direction) {
+    console.log("we are driving " + direction )
+  }
+}
+
+const car1 = new Car("red", 120);
+
+class rollsroyce extends Car {
+  constructor(color, speed, year=1977){
+    super(color, speed);
+    this.year = year;
+  }
+
+  drive(direction) {
+    super.drive(direction);
+    console.log(' in style')
+  }
+}
+
+~~~
 ### Functional Programming
 A style of programming where solutions are simple, isolated functions, without any side effects outside of the function scope.
 

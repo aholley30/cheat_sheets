@@ -7,6 +7,10 @@
 - Italicize a range of text with ```<i></i>```
 - Indicate that a range of text has importance with the ```<strong>``` open and closing tags - aka bold text
 - Bolden a range of text with the ```<b>``` open and closing tags
+- **Responsive design** is the combination of 3 techniques
+  1. Flexible grids - made up of columns, gutters (space b/w between columns), and l/r margin
+  2. Fluid images - set max-width to 100%
+  3. Media queries - allows devs to query the display size, aspect ratio, and orientation to conditionally apply css rules
 
 ### Head
 - Start with a ```<DOCTYPE html>``` and a ```<html lang="en">```

@@ -20,6 +20,21 @@
   <div class="well"></div>
   ~~~
 - **ID Attributes** must be unique to a specific element and used only once per page
+### Bootstrap Grid System
+- Always has this type of format:
+  ~~~html
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6"> <!--Max size of 12, bootstrap can size automatically tho-->
+      </div>
+    </div>
+  </div>
+  ~~~
+- the first class is for mobile, the second for desktop
+  ~~~html
+  <div class="col-12 col-lg-6>
+  ~~~
+  - This'll make the content stacked on mobile. but side by side on desktop
 #### Bootstrap: Buttons
 - For a bootstrap styled button add the classes "btn" and "btn-default" to the button element.
   ~~~html

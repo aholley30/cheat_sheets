@@ -1,0 +1,153 @@
+* {
+  background-color: lightgoldenrodyellow;
+}
+h1 {
+  color:brown;
+}
+
+/* 
+  Descendant selector. 
+  selects all items with the classname header that are descendants of 
+  everything with the classname div1 
+*/
+.div1 .header {
+  text-transform: uppercase;
+  text-decoration:underline red wavy 5px;
+  text-align: center;
+}
+
+/* 
+  ID selector. 
+  This more specific rule takes precedence
+  */
+#second_h1 {
+  color: maroon;
+}
+
+/* 
+  Descendant selector. 
+  selects all items with the classname random that are descendants of 
+  everything with the classname div2 
+*/
+.div2 .random {
+  color:palevioletred;
+}
+
+/* 
+Child Selectors 
+Only selects elements that are immediate descendants of a selector
+*/
+.div2 > p {
+  color: plum;
+}
+
+/* 
+Pseudo selector 
+Select elements based on state 
+*/
+#second_h1:hover {
+  background-color: black;
+}
+
+.rgb {
+  background-color: rgb(255, 0, 0);
+}
+
+/*
+a for the alpha channel
+controls opacity
+*/
+.rgba {
+  background-color: rgba(255, 120, 0, 128);
+}
+
+/* 
+the circle - hue saturation lightness
+*/
+.hsl {
+  background-color: hsl(57, 100%, 50%);
+}
+
+.hex {
+  background-color: #00FF00;
+}
+
+.predefined {
+  background-color: blue;
+}
+
+.indigo {
+  background-color: indigo;
+}
+
+.violet {
+  background-color: violet;
+}
+
+
+/* table, th, td {
+  margin: 0;
+  padding: 0;
+  border-width: 0.15em;
+  border: black;
+  border-style: solid;
+} */
+
+/* alignment demo */
+.parent {
+  border: 4px solid red;
+}
+.child {
+  width: 50%;
+  padding: 20px;
+  border: 4px solid green;
+  margin: auto;
+}
+
+.bootdemo > h1 {
+  text-align: center;
+  text-decoration:underline black dotted 2px;
+  padding: 1em;
+}
+
+.button {
+ text-align: center;
+ padding-bottom: 1em;
+}
+
+.container, .row, .col {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  background-color: gray !important;
+}
+
+.col > *, .tr td{
+  background-color: gray !important;
+}
+
+.food {
+  padding-top: 0.5em;
+}
+
+/* Testing the scope of styling */
+p > span {
+  color: gray;
+}
+
+p > em {
+  color: green;
+}
+
+em {
+  color: purple;
+}
+/* end test */
+
+/* Bold the first item in a list */
+li {
+  font-weight: bold;
+}
+
+li + li{
+  font-weight: normal;
+}
